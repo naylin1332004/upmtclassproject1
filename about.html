@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPMT CLASS - B.Ed Program</title>
+  <style>
+    body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f6f8;
+    color: #333;
+  }
+  
+  header {
+    background: #0077b6;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .intro {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #e0f7fa;
+  }
+  
+  .intro img {
+    width: 150px;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+  
+  .curriculum {
+    padding: 20px;
+  }
+  
+  .curriculum h2 {
+    color: #0077b6;
+  }
+  
+  #curriculum-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #curriculum-list li {
+    background: #ffffff;
+    margin: 10px 0;
+    padding: 15px;
+    border-left: 5px solid #0077b6;
+    transition: transform 0.2s;
+  }
+  
+  #curriculum-list li:hover {
+    transform: scale(1.02);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+    background: #0077b6;
+    color: white;
+  }
+  
+
+  /* mobile view  */
+
+  .intro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background: #e0f7fa;
+  }
+  
+  .intro img {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 10px;
+  }
+  
+  .intro div {
+    flex: 1;
+  }
+
+  
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+  
+    .intro {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .curriculum h2 {
+      font-size: 1.5rem;
+    }
+  
+    #curriculum-list li {
+      font-size: 1rem;
+      padding: 10px;
+    }
+  }
+  
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UPMT CLASS</h1>
+    <p>B.Ed (Q) Program Overview</p>
+  </header>
+
+  <section class="intro">
+    <img src="./assets/image/logo.jpg" alt="Sir U Phyo Myat Thu" />
+    <div>
+      <h2>Instructor: Sir U Phyo Myat Thu</h2>
+      <p>Specialist in B.Ed(Q) Curriculum</p>
+    </div>
+  </section>
+
+  <section class="curriculum">
+    <h2>📘 Curriculum Components</h2>
+    <ul id="curriculum-list">
+      <!-- Items will be added by JavaScript -->
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 UPMT Class. All rights reserved.</p>
+  </footer>
+
+  <script src="./js/about.js"></script>
+</body>
+</html>
