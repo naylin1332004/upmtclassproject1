@@ -1,0 +1,47 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UPMT Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Login to UPMT Portal</h1>
+    <form id="loginForm">
+      <select id="role" required>
+        <option value="">Select Role</option>
+        <option value="teacher">Teacher</option>
+        <option value="student">Student</option>
+      </select>
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    const users = {
+      teacher: { username: "teacher1", password: "teach123" },
+      student: { username: "student1", password: "stud123" }
+    };
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const role = document.getElementById('role').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (users[role] && users[role].username === username && users[role].password === password) {
+        localStorage.setItem('loggedInUser', JSON.stringify({ role, username }));
+        window.location.href = 'studentresult.html';
+      } else {
+        alert('Invalid credentials');
+      }
+    });
+    localStorage.setItem('loggedInUser', JSON.stringify({ role, username }));
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Upload with Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+
+    .upload-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .preview {
+      margin-top: 30px;
+      background-color: #eaf2f8;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    .preview h3 {
+      margin-bottom: 10px;
+    }
+
+    .preview img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    .pdf-link {
+      margin-top: 10px;
+      display: block;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="upload-container">
+    <h2>Upload Your Project</h2>
+    <form id="projectForm">
+      <label for="title">Project Title</label>
+      <input type="text" id="title" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" rows="4" required></textarea>
+
+      <label for="file">Upload File</label>
+      <input type="file" id="file" accept=".jpg,.jpeg,.png,.gif,.pdf" required>
+
+      <button type="submit">Post Project</button>
+    </form>
+
+    <div class="preview" id="preview" style="display:none;">
+      <h3>Project Preview</h3>
+      <p><strong>Title:</strong> <span id="previewTitle"></span></p>
+      <p><strong>Description:</strong> <span id="previewDesc"></span></p>
+      <div id="filePreview"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('projectForm');
+    const preview = document.getElementById('preview');
+    const previewTitle = document.getElementById('previewTitle');
+    const previewDesc = document.getElementById('previewDesc');
+    const filePreview = document.getElementById('filePreview');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      const fileInput = document.getElementById('file');
+      const file = fileInput.files[0];
+
+      previewTitle.textContent = title;
+      previewDesc.textContent = description;
+      filePreview.innerHTML = '';
+
+      if (file) {
+        const fileType = file.type;
+
+        if (fileType.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            filePreview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        } else if (fileType === 'application/pdf') {
+          const url = URL.createObjectURL(file);
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = `View PDF: ${file.name}`;
+          link.target = '_blank';
+          link.className = 'pdf-link';
+          filePreview.appendChild(link);
+        } else {
+          filePreview.textContent = `Unsupported file type: ${file.name}`;
+        }
+      }
+
+      preview.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
